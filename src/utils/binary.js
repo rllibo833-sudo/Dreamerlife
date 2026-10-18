@@ -1,4 +1,4 @@
-export async function imageToBinary(url) {
+export async function imageToBinary(url = `${import.meta.env.BASE_URL}photos/01-cafe-arrival.jpg`) {
   const response = await fetch(url);
   if (!response.ok) {
     throw new Error(`Failed to fetch image: ${response.status} ${response.statusText}`);

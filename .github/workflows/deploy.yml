@@ -8,24 +8,62 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: dreamerlife-pages
+  cancel-in-progress: true
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
+
+      - name: Verify scene source images
+        shell: bash
+        run: |
+          set -euo pipefail
+          for image in \
+            01-cafe-arrival.jpg \
+            02-waiting-at-cafe.jpg \
+            03-woman-arrives.jpg \
+            04-cafe-interview.jpg \
+            05-night-phone.jpg
+          do
+            test -s "$image" || { echo "::error::Missing or empty scene image: $image"; exit 1; }
+            echo "OK: $image ($(wc -c < "$image") bytes)"
+          done
+
       - name: Install dependencies
         run: npm install
+
       - name: Build Vite app
         run: npm run build
-      - name: Copy scene images to the published assets folder
+
+      - name: Copy and verify published assets
+        shell: bash
         run: |
+          set -euo pipefail
           mkdir -p dist/photos
           cp 01-cafe-arrival.jpg 02-waiting-at-cafe.jpg 03-woman-arrives.jpg 04-cafe-interview.jpg 05-night-phone.jpg dist/photos/
+          touch dist/.nojekyll
+          test -s dist/index.html
+          for image in \
+            01-cafe-arrival.jpg \
+            02-waiting-at-cafe.jpg \
+            03-woman-arrives.jpg \
+            04-cafe-interview.jpg \
+            05-night-phone.jpg
+          do
+            test -s "dist/photos/$image" || { echo "::error::Missing published asset: dist/photos/$image"; exit 1; }
+          done
+          echo "Build and all five scene images verified."
+
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:

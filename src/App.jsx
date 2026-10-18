@@ -37,11 +37,11 @@ export default function App() {
         background: "#111",
       }}
     >
-      {scene === 1 && <CafeArrival imageUrl="./01-cafe-arrival.jpg" />}
-      {scene === 2 && <Scene2 imageUrl="./02-waiting-at-cafe.jpg" />}
-      {scene === 3 && <Scene3 imageUrl="./03-woman-arrives.jpg" />}
-      {scene === 4 && <Scene4 imageUrl="./04-cafe-interview.jpg" />}
-      {scene === 5 && <Scene5 imageUrl="./05-night-phone.jpg" />}
+      {scene === 1 && <CafeArrival imageUrl={`${import.meta.env.BASE_URL}photos/01-cafe-arrival.jpg`} />}
+      {scene === 2 && <Scene2 imageUrl={`${import.meta.env.BASE_URL}photos/02-waiting-at-cafe.jpg`} />}
+      {scene === 3 && <Scene3 imageUrl={`${import.meta.env.BASE_URL}photos/03-woman-arrives.jpg`} />}
+      {scene === 4 && <Scene4 imageUrl={`${import.meta.env.BASE_URL}photos/04-cafe-interview.jpg`} />}
+      {scene === 5 && <Scene5 imageUrl={`${import.meta.env.BASE_URL}photos/05-night-phone.jpg`} />}
       <div style={{ padding: 16, background: "#fff", color: "#172033" }}>
         <VideoExporter />
       </div>

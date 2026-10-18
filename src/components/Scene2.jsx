@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { imageToBinary } from "../utils/binary.js";
 
-const DEFAULT_IMAGE_URL = "./02-waiting-at-cafe.jpg";
+const DEFAULT_IMAGE_URL = `${import.meta.env.BASE_URL}photos/02-waiting-at-cafe.jpg`;
 const WIDTH = 720;
 const HEIGHT = 1280;
 const DURATION_MS = 5000;

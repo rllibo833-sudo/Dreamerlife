@@ -4,7 +4,7 @@ export const SCENE1 = Object.freeze({
   durationMs: 4000,
   camera: {
     zoomStart: 1,
-    zoomEnd: 1.018,
+    zoomEnd: 1,
     driftX: 3,
     driftY: 2,
     cycleMs: 12000,

@@ -1,0 +1,34 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - name: Install dependencies
+        run: npm install
+      - name: Build Vite app
+        run: npm run build
+      - name: Copy scene images to the published assets folder
+        run: |
+          mkdir -p dist/photos
+          cp 01-cafe-arrival.jpg 02-waiting-at-cafe.jpg 03-woman-arrives.jpg 04-cafe-interview.jpg 05-night-phone.jpg dist/photos/
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: dist
+          branch: gh-pages

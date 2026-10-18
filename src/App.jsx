@@ -1,27 +1,40 @@
 import { useEffect, useState } from "react";
 import CafeArrival from "./components/cafe-arrival.jsx";
 import Scene2 from "./components/Scene2.jsx";
+import Scene3 from "./components/Scene3.jsx";
 
-/**
- * Minimal sequence host: Scene 1 plays first, then Scene 2.
- * Each scene is presented for five seconds.
- */
+const SCENE_DURATIONS = {
+  1: 5000,
+  2: 5000,
+  3: 6000,
+};
+
 export default function App() {
   const [scene, setScene] = useState(1);
 
   useEffect(() => {
-    if (scene !== 1) return undefined;
-    const timeoutId = window.setTimeout(() => setScene(2), 5000);
+    if (scene >= 3) return undefined;
+
+    const timeoutId = window.setTimeout(
+      () => setScene((current) => Math.min(3, current + 1)),
+      SCENE_DURATIONS[scene]
+    );
+
     return () => window.clearTimeout(timeoutId);
   }, [scene]);
 
   return (
-    <main style={{ width: "100%", maxWidth: 720, margin: "0 auto", background: "#111" }}>
-      {scene === 1 ? (
-        <CafeArrival imageUrl="./01-cafe-arrival.jpg" />
-      ) : (
-        <Scene2 imageUrl="./02-waiting-at-cafe.jpg" />
-      )}
+    <main
+      style={{
+        width: "100%",
+        maxWidth: 720,
+        margin: "0 auto",
+        background: "#111",
+      }}
+    >
+      {scene === 1 && <CafeArrival imageUrl="./01-cafe-arrival.jpg" />}
+      {scene === 2 && <Scene2 imageUrl="./02-waiting-at-cafe.jpg" />}
+      {scene === 3 && <Scene3 imageUrl="./03-woman-arrives.jpg" />}
     </main>
   );
 }

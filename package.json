@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "homepage": "https://rilibo833-sudo.github.io/Dreamerlife/",
+  "homepage": "https://rllibo833-sudo.github.io/Dreamerlife/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

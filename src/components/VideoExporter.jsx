@@ -8,11 +8,11 @@ import Scene5 from "./Scene5.jsx";
 const WIDTH = 720;
 const HEIGHT = 1280;
 const SCENES = [
-  { id: 1, duration: 4000, image: "./01-cafe-arrival.jpg" },
-  { id: 2, duration: 5000, image: "./02-waiting-at-cafe.jpg" },
-  { id: 3, duration: 6000, image: "./03-woman-arrives.jpg" },
-  { id: 4, duration: 6000, image: "./04-cafe-interview.jpg" },
-  { id: 5, duration: 4000, image: "./05-night-phone.jpg" },
+  { id: 1, duration: 4000, image: `${import.meta.env.BASE_URL}photos/01-cafe-arrival.jpg` },
+  { id: 2, duration: 5000, image: `${import.meta.env.BASE_URL}photos/02-waiting-at-cafe.jpg` },
+  { id: 3, duration: 6000, image: `${import.meta.env.BASE_URL}photos/03-woman-arrives.jpg` },
+  { id: 4, duration: 6000, image: `${import.meta.env.BASE_URL}photos/04-cafe-interview.jpg` },
+  { id: 5, duration: 4000, image: `${import.meta.env.BASE_URL}photos/05-night-phone.jpg` },
 ];
 
 const wait = (ms) => new Promise((resolve) => window.setTimeout(resolve, ms));
@@ -78,8 +78,8 @@ export default function VideoExporter({ className = "" }) {
 
       // Optional soundtrack: attempt both conventional public paths.
       try {
-        let response = await fetch("/music/baila.mp3");
-        if (!response.ok) response = await fetch("/baila.mp3");
+        let response = await fetch(`${import.meta.env.BASE_URL}music/baila.mp3`);
+        if (!response.ok) response = await fetch(`${import.meta.env.BASE_URL}baila.mp3`);
         if (response.ok) {
           const audioBlob = await response.blob();
           audioObjectUrl = URL.createObjectURL(audioBlob);

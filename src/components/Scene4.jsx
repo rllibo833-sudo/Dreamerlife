@@ -5,7 +5,7 @@ const WIDTH = 720;
 const HEIGHT = 1280;
 const DURATION_MS = 6000;
 const FRAME_INTERVAL_MS = 1000 / 60;
-const DEFAULT_IMAGE_URL = "./04-cafe-interview.jpg";
+const DEFAULT_IMAGE_URL = `${import.meta.env.BASE_URL}photos/04-cafe-interview.jpg`;
 
 export default function Scene4({
   imageUrl = DEFAULT_IMAGE_URL,
